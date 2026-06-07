@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "start": "node index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/eljinaguilar89-droid/devops-practice-app/issues"
   },
-  "homepage": "https://github.com/eljinaguilar89-droid/devops-practice-app#readme"
+  "homepage": "https://github.com/eljinaguilar89-droid/devops-practice-app#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
+  }
 }
