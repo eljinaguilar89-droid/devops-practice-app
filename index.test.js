@@ -7,7 +7,7 @@ app.get('/health', (req, res) => res.json({ status: 'healthy', uptime: process.u
 
 test('GET / returns 200', async () => {
   const res = await request(app).get('/');
-  expect(res.statusCode).toBe(200);
+  expect(res.statusCode).toBe(999);
 });
 
 test('GET /health returns healthy status', async () => {
