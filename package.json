@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "start": "node index.js",
+    "start": "node index.js",
     "test": "jest"
   },
   "repository": {
@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/eljinaguilar89-droid/devops-practice-app#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "prom-client": "^15.1.3"
   },
   "devDependencies": {
     "jest": "^30.4.2",
