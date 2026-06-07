@@ -1,0 +1,27 @@
+groups:
+  - name: app-alerts
+    rules:
+
+      - alert: AppDown
+        expr: up{job="app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "App is DOWN — no response from the service"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[2m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Error rate is above 5% for the last 2 minutes"
+
+      - alert: HighMemoryUsage
+        expr: nodejs_heap_size_used_bytes / nodejs_heap_size_total_bytes * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Heap memory usage is above 80% for 5 minutes"

@@ -15,6 +15,15 @@ const httpRequestCounter = new client.Counter({
   registers: [register],
 });
 
+//Histogram metric to track the duration of HTTP requests
+const httpRequestDuration = new client.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'status'],
+  buckets: [0.01, 0.05, 0.1, 0.3, 0.5, 1],
+  registers: [register],
+});
+
 // middleware to count every request automatically
 app.use((req, res, next) => {
   res.on('finish', () => {
@@ -23,6 +32,16 @@ app.use((req, res, next) => {
       route: req.path,
       status: res.statusCode,
     });
+  });
+  next();
+});
+
+// middleware to track request duration
+app.use((req, res, next) => {
+  const end = httpRequestDuration.startTimer();
+  res.on('finish', () => {
+    end({ method: req.method, route: req.path, status: res.statusCode });
+    httpRequestCounter.inc({ method: req.method, route: req.path, status: res.statusCode });
   });
   next();
 });
